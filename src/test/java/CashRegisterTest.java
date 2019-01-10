@@ -1,3 +1,4 @@
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -33,5 +34,12 @@ public class CashRegisterTest {
         List<Integer> actualContents = cashRegister.show();
 
         assertEquals(expectedContents, actualContents);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testIndexOutOfBoundsException() {
+        CashRegister cashRegister = new CashRegister();
+        List<Integer> invalidNumberOfBillsToAdd = Arrays.asList(1);
+        cashRegister.add(invalidNumberOfBillsToAdd);
     }
 }
