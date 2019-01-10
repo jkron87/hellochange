@@ -1,5 +1,8 @@
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class CashRegisterTest {
@@ -13,14 +16,10 @@ public class CashRegisterTest {
 
     @Test
     public void cashRegisterAddsDenominations() throws Exception {
-
         CashRegister cashRegister = new CashRegister();
-        Denomination denominationToBeAdd = Denomination.ONE;
-        cashRegister.add(denominationToBeAdd, 1);
+        List<Integer> billsToAdd = Arrays.asList(1, 1, 1, 1, 2);
+        cashRegister.add(billsToAdd);
 
-        denominationToBeAdd = Denomination.FIVE;
-        cashRegister.add(denominationToBeAdd, 2);
-
-        assertEquals(11, cashRegister.getTotalRegisterValue());
+        assertEquals(39, cashRegister.getTotalRegisterValue());
     }
 }
