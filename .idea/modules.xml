@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hellochange.iml" filepath="$PROJECT_DIR$/.idea/modules/hellochange.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hellochange_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hellochange_main.iml" group="hellochange" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hellochange_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hellochange_test.iml" group="hellochange" />
+    </modules>
+  </component>
+</project>
