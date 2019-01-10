@@ -1,4 +1,3 @@
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -19,19 +18,19 @@ public class CashRegisterTest {
     public void cashRegisterAddsDenominations() throws Exception {
         CashRegister cashRegister = new CashRegister();
         List<Integer> billsToAdd = Arrays.asList(1, 1, 1, 1, 2);
-        cashRegister.add(billsToAdd);
+        List<Integer> actualContents = cashRegister.put(billsToAdd);
+        List<Integer> expectedContents = Arrays.asList(39, 1, 1, 1, 1, 2);
 
-        assertEquals(39, cashRegister.getTotalRegisterValue());
+        assertEquals(expectedContents, actualContents);
     }
 
     @Test
     public void cashRegisterShowsContents() throws Exception {
         CashRegister cashRegister = new CashRegister();
         List<Integer> billsToAdd = Arrays.asList(1, 1, 1, 1, 2);
-        cashRegister.add(billsToAdd);
 
         List<Integer> expectedContents = Arrays.asList(39, 1, 1, 1, 1, 2);
-        List<Integer> actualContents = cashRegister.show();
+        List<Integer> actualContents = cashRegister.put(billsToAdd);
 
         assertEquals(expectedContents, actualContents);
     }
@@ -40,6 +39,6 @@ public class CashRegisterTest {
     public void testIndexOutOfBoundsException() {
         CashRegister cashRegister = new CashRegister();
         List<Integer> invalidNumberOfBillsToAdd = Arrays.asList(1);
-        cashRegister.add(invalidNumberOfBillsToAdd);
+        cashRegister.put(invalidNumberOfBillsToAdd);
     }
 }

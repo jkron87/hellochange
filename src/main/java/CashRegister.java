@@ -21,7 +21,7 @@ public class CashRegister {
         return totalRegisterValue;
     }
 
-    public void add(List<Integer> denominationsToBeAdded) {
+    public List<Integer> put(List<Integer> denominationsToBeAdded) {
         if (denominationsToBeAdded.size() == 5) {
             contents.forEach((key, value) -> {
                 contents.put(key, contents.get(key) + denominationsToBeAdded.get(key.getIndex()));
@@ -29,6 +29,9 @@ public class CashRegister {
         } else {
             throw new IllegalArgumentException("List of denominations needs to be a list of 5 elements");
         }
+
+        List<Integer> registerContents = show();
+        return registerContents;
     }
 
     public List<Integer> show() {
