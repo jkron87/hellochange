@@ -22,4 +22,16 @@ public class CashRegisterTest {
 
         assertEquals(39, cashRegister.getTotalRegisterValue());
     }
+
+    @Test
+    public void cashRegisterShowsContents() throws Exception {
+        CashRegister cashRegister = new CashRegister();
+        List<Integer> billsToAdd = Arrays.asList(1, 1, 1, 1, 2);
+        cashRegister.add(billsToAdd);
+
+        List<Integer> expectedContents = Arrays.asList(39, 1, 1, 1, 1, 2);
+        List<Integer> actualContents = cashRegister.show();
+
+        assertEquals(expectedContents, actualContents);
+    }
 }

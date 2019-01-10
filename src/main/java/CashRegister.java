@@ -23,13 +23,20 @@ public class CashRegister {
 
     public void add(List<Integer> denominationsToBeAdded) {
         if (denominationsToBeAdded.size() == 5) {
-            contents.put(Denomination.TWENTY, contents.get(Denomination.TWENTY) + denominationsToBeAdded.get(0));
-            contents.put(Denomination.TEN, contents.get(Denomination.TEN) + denominationsToBeAdded.get(1));
-            contents.put(Denomination.FIVE, contents.get(Denomination.FIVE) + denominationsToBeAdded.get(2));
-            contents.put(Denomination.TWO, contents.get(Denomination.TWO) + denominationsToBeAdded.get(3));
-            contents.put(Denomination.ONE, contents.get(Denomination.ONE) + denominationsToBeAdded.get(4));
+            contents.forEach((key, value) -> {
+                contents.put(key, contents.get(key) + denominationsToBeAdded.get(key.getIndex()));
+            });
         } else {
             throw new IllegalArgumentException("List of denominations needs to be a list of 5 elements");
         }
+    }
+
+    public List<Integer> show() {
+        ArrayList<Integer> allContents = new ArrayList<>();
+        allContents.add(getTotalRegisterValue());
+        contents.forEach((key, value) -> {
+            allContents.add(value);
+        });
+        return allContents;
     }
 }
