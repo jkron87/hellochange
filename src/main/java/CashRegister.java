@@ -29,8 +29,7 @@ public class CashRegister {
             throw new IllegalArgumentException("List of denominations must contain 5 elements");
         }
 
-        List<Integer> registerContents = this.show();
-        return registerContents;
+        return this.show();
     }
 
     public List<Integer> show() {
@@ -51,8 +50,7 @@ public class CashRegister {
             throw new IllegalArgumentException("List of denominations must contain 5 elements");
         }
 
-        List<Integer> registerContents = this.show();
-        return registerContents;
+        return this.show();
     }
 
     public List<Integer> change(int changeAmount) {
@@ -67,6 +65,7 @@ public class CashRegister {
                 if (billsAvailable < billsNeeded) {
                     billsNeeded = billsAvailable;
                 }
+
                 changeLeft -= billsNeeded * denomination.getIntValue();
                 denominationsToSubtract.add(billsNeeded);
 
@@ -75,6 +74,12 @@ public class CashRegister {
             }
         }
 
-        return this.take(denominationsToSubtract);
+        if (changeLeft > 0) {
+            throw new RuntimeException("Sorry! Change can't be made");
+        }
+
+        this.take(denominationsToSubtract);
+
+        return denominationsToSubtract;
     }
 }

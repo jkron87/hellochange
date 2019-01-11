@@ -35,8 +35,8 @@ public class CashRegisterTest {
         assertEquals(expectedContents, actualContents);
 
         billsToAdd = Arrays.asList(0, 0, 0, 0, 1);
-        actualContents = cashRegister.put(billsToAdd);
         expectedContents = Arrays.asList(40, 1, 1, 1, 1, 3);
+        actualContents = cashRegister.put(billsToAdd);
 
         assertEquals(expectedContents, actualContents);
 
@@ -56,9 +56,10 @@ public class CashRegisterTest {
         cashRegister.put(billsToAdd);
 
         List<Integer> billsToSubtract = Arrays.asList(1, 0, 0, 0, 0);
-        List<Integer> actualContents = cashRegister.take(billsToSubtract);
 
         List<Integer> expectedContents = Arrays.asList(40, 2, 0, 0, 0, 0);
+        List<Integer> actualContents = cashRegister.take(billsToSubtract);
+
 
         assertEquals(expectedContents, actualContents);
     }
@@ -69,11 +70,24 @@ public class CashRegisterTest {
         List<Integer> billsToAdd = Arrays.asList(0, 0, 2, 0, 3);
         cashRegister.put(billsToAdd);
 
-        List<Integer> actualContents = cashRegister.change(8);
+        List<Integer> expectedChangeDenominationsToSubtract = Arrays.asList(0, 0, 1, 0, 3);
+        List<Integer> actualChangeDenominationsToSubtract = cashRegister.change(8);
 
-        List<Integer> expectedContents = Arrays.asList(5, 0, 0, 1, 0, 0);
+        assertEquals(expectedChangeDenominationsToSubtract, actualChangeDenominationsToSubtract);
 
-        assertEquals(expectedContents, actualContents);
+        List<Integer> expectedRegisterContents = Arrays.asList(5, 0, 0, 1, 0, 0);
+        List<Integer> actualRegisterContents = cashRegister.show();
+
+        assertEquals(expectedRegisterContents, actualRegisterContents);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void cashRegisterThrowsExceptionWhenUnableToMakeChange() throws Exception {
+        CashRegister cashRegister = new CashRegister();
+        List<Integer> billsToAdd = Arrays.asList(0, 1, 0, 0, 3);
+        cashRegister.put(billsToAdd);
+
+        cashRegister.change(8);
     }
 
 }
