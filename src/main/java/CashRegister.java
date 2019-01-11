@@ -2,8 +2,6 @@ import java.util.*;
 
 public class CashRegister {
 
-    private int totalRegisterValue = 0;
-
     private LinkedHashMap<Denomination, Integer> contents = new LinkedHashMap<Denomination, Integer>();
 
     public CashRegister() {
@@ -15,6 +13,7 @@ public class CashRegister {
     }
 
     public int getTotalRegisterValue() {
+        int totalRegisterValue = 0;
         for (Denomination denomination : contents.keySet()) {
             totalRegisterValue += denomination.getIntValue() * contents.get(denomination);
         }
@@ -41,5 +40,20 @@ public class CashRegister {
             allContents.add(value);
         });
         return allContents;
+    }
+
+
+    public List<Integer> take(List<Integer> billsToSubtract) {
+        if (billsToSubtract.size() == 5) {
+            contents.forEach((key, value) -> {
+                contents.put(key, contents.get(key) - billsToSubtract.get(key.getIndex()));
+            });
+        } else {
+            throw new IllegalArgumentException("List of denominations needs to be a list of 5 elements");
+        }
+
+        List<Integer> registerContents = show();
+        return registerContents;
+
     }
 }

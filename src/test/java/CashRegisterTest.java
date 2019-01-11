@@ -33,6 +33,13 @@ public class CashRegisterTest {
         List<Integer> actualContents = cashRegister.put(billsToAdd);
 
         assertEquals(expectedContents, actualContents);
+
+        billsToAdd = Arrays.asList(0, 0, 0, 0, 1);
+        actualContents = cashRegister.put(billsToAdd);
+        expectedContents = Arrays.asList(40, 1, 1, 1, 1, 3);
+
+        assertEquals(expectedContents, actualContents);
+
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -41,4 +48,19 @@ public class CashRegisterTest {
         List<Integer> invalidNumberOfBillsToAdd = Arrays.asList(1);
         cashRegister.put(invalidNumberOfBillsToAdd);
     }
+
+    @Test
+    public void cashRegisterSubtractsDenominations() throws Exception {
+        CashRegister cashRegister = new CashRegister();
+        List<Integer> billsToAdd = Arrays.asList(3, 0, 0, 0, 0);
+        cashRegister.put(billsToAdd);
+
+        List<Integer> billsToSubtract = Arrays.asList(1, 0, 0, 0, 0);
+        List<Integer> actualContents = cashRegister.take(billsToSubtract);
+
+        List<Integer> expectedContents = Arrays.asList(40, 2, 0, 0, 0, 0);
+
+        assertEquals(expectedContents, actualContents);
+    }
+
 }
