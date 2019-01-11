@@ -26,10 +26,10 @@ public class CashRegister {
                 contents.put(key, contents.get(key) + denominationsToBeAdded.get(key.getIndex()));
             });
         } else {
-            throw new IllegalArgumentException("List of denominations needs to be a list of 5 elements");
+            throw new IllegalArgumentException("List of denominations must contain 5 elements");
         }
 
-        List<Integer> registerContents = show();
+        List<Integer> registerContents = this.show();
         return registerContents;
     }
 
@@ -42,18 +42,39 @@ public class CashRegister {
         return allContents;
     }
 
-
     public List<Integer> take(List<Integer> billsToSubtract) {
         if (billsToSubtract.size() == 5) {
             contents.forEach((key, value) -> {
                 contents.put(key, contents.get(key) - billsToSubtract.get(key.getIndex()));
             });
         } else {
-            throw new IllegalArgumentException("List of denominations needs to be a list of 5 elements");
+            throw new IllegalArgumentException("List of denominations must contain 5 elements");
         }
 
-        List<Integer> registerContents = show();
+        List<Integer> registerContents = this.show();
         return registerContents;
+    }
 
+    public List<Integer> change(int changeAmount) {
+        List<Integer> denominationsToSubtract = new ArrayList<>();
+        int changeLeft = changeAmount;
+        for (Denomination denomination : contents.keySet()) {
+            if (contents.get(denomination) > 0 && changeLeft > 0) {
+
+                int billsNeeded = changeLeft / denomination.getIntValue();
+                int billsAvailable = contents.get(denomination);
+
+                if (billsAvailable < billsNeeded) {
+                    billsNeeded = billsAvailable;
+                }
+                changeLeft -= billsNeeded * denomination.getIntValue();
+                denominationsToSubtract.add(billsNeeded);
+
+            } else {
+                denominationsToSubtract.add(0);
+            }
+        }
+
+        return this.take(denominationsToSubtract);
     }
 }

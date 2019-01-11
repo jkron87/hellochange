@@ -63,4 +63,17 @@ public class CashRegisterTest {
         assertEquals(expectedContents, actualContents);
     }
 
+    @Test
+    public void cashRegisterMakesChange() throws Exception {
+        CashRegister cashRegister = new CashRegister();
+        List<Integer> billsToAdd = Arrays.asList(0, 0, 2, 0, 3);
+        cashRegister.put(billsToAdd);
+
+        List<Integer> actualContents = cashRegister.change(8);
+
+        List<Integer> expectedContents = Arrays.asList(5, 0, 0, 1, 0, 0);
+
+        assertEquals(expectedContents, actualContents);
+    }
+
 }
